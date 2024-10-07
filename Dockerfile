@@ -1,3 +1,11 @@
-FROM node:20-bookworm
+FROM node:18-alpine
 
-RUN npx -y playwright@1.47.2 install --with-deps
+WORKDIR /poc-quath-playwright-docker
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+CMD ["npx", "playwright", "test"]
