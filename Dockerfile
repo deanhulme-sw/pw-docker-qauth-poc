@@ -8,4 +8,4 @@ RUN npm install
 
 COPY . .
 
-CMD ["npx", "playwright", "test"]
+RUN npx -y playwright@1.47.2 install --with-deps
