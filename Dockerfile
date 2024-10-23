@@ -1,16 +1,20 @@
 # Base image
 FROM node:18-alpine
 
+# Get the latest version of Playwright
+FROM mcr.microsoft.com/playwright:v1.47.2-jammy
+
 # Set the working directory
 WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-RUN apk --no-cache add curl jq bash bind-tools
-
-# Install app dependencies
+# Install dependencies
 RUN npm install
 
-# Copy rest files 
+# Copy the rest of the application files
 COPY . .
+
+# Set the entry point for the container
+CMD ["npx", "playwright", "test"]
